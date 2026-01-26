@@ -159,7 +159,7 @@ on:
       kernel_version:
         description: 'Select kernel version'
         required: true
-        default: '5.15.y'
+        default: '6.6.y'
         type: choice
         options:
           - 5.10.y
@@ -185,6 +185,7 @@ on:
         options:
           - 23.05.x
           - 24.10.x
+          - 25.12.x
       rootfs_url:
         description: 'Input Rootfs URL (Wget Only)'
         required: true
