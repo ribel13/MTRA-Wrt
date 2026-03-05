@@ -252,28 +252,28 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v2
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+          GITHUB_TOKEN: ${{ secrets.AKSI_GITHUB }}
         with:
-          name: Mutiara-Wrt ${{ github.event.inputs.openwrt_ver }}
+          name: FRDMX-Wrt ${{ github.event.inputs.openwrt_ver }}
           tag_name: v${{ github.event.inputs.openwrt_ver }}_k${{ github.event.inputs.kernel_version }}
           draft: false
           prerelease: false
           files: |
                 ${{ env.FILE_PATH }}
           body: |
-            ### Mutiara-Wrt Information
+            ### Information
             * Default IP: 192.168.1.1
             * Default username: root
-            * Default password: mutiara
-            * Default WIFI name: Mutiara-Wrt
-            * Default WIFI password: 12345678
-            * Release date: ${{ env.date_time }}
+            #* Default password: mutiara
+            #* Default WIFI name: Mutiara-Wrt
+            #* Default WIFI password: 12345678
+            #* Release date: ${{ env.date_time }}
             
             ### Tools Installed
-            * Radius Monitor
-            * OpenClash v0.46.046-beta
-            * WhatsApp Bot
-            * and others
+            #* Radius Monitor
+            #* OpenClash v0.46.046-beta
+            #* WhatsApp Bot
+            #* and others
 
   build_all:
     name: Build All
