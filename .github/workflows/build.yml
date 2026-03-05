@@ -5,10 +5,19 @@ name: Build OpenWrt
 on:
   workflow_dispatch:
     inputs:
+      openwrt_ver:
+        description: 'Select OpenWrt Version'
+        required: true
+        default: '23.05.x'
+        type: choice
+        options:
+          - 23.05.x
+          - 24.10.x
+          - 25.12.x
       board_version:
         description: 'Select board version to compile'
         required: true
-        default: 'all'
+        default: 's905x-b860h'
         type: choice
         options:
           - all
@@ -177,15 +186,20 @@ on:
           - 512
           - 1024
           - 1536
-      openwrt_ver:
-        description: 'Select OpenWrt Version'
-        required: true
-        default: '23.05.x'
-        type: choice
-        options:
-          - 23.05.x
-          - 24.10.x
-          - 25.12.x
+      auto_kernel:
+        description: "Auto use the latest kernel"
+        required: false
+        default: true
+        type: boolean
+      kernel_version_input:
+        description: "Input custom kernel version"
+        required: false
+        default: ""  
+      kernel_repo:
+        description: "Set the kernel repository"
+        required: false
+        #default: "https://github.com/jerbe/armbian_kernel/tree/main/pub"
+        default: "https://github.com/ribel13/kernel"
       rootfs_url:
         description: 'Input Rootfs URL (Wget Only)'
         required: true
@@ -348,7 +362,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
         with:
-          name: Mutiara-Wrt ${{ github.event.inputs.openwrt_ver }}
+          name: FRDM-Wrt ${{ github.event.inputs.openwrt_ver }}
           tag_name: v${{ github.event.inputs.openwrt_ver }}_k${{ github.event.inputs.kernel_version }}
           draft: false
           prerelease: false
@@ -358,13 +372,13 @@ jobs:
             ### Mutiara-Wrt Information
             * Default IP: 192.168.1.1
             * Default username: root
-            * Default password: mutiara
-            * Default WIFI name: Mutiara-Wrt
-            * Default WIFI password: 12345678
-            * Release date: ${{ env.date_time }}
+            #* Default password: mutiara
+            #* Default WIFI name: Mutiara-Wrt
+            #* Default WIFI password: 12345678
+            #* Release date: ${{ env.date_time }}
             
             ### Tools Installed
-            * Radius Monitor
-            * OpenClash v0.46.046-beta
-            * WhatsApp Bot
-            * and others
+            #* Radius Monitor
+            #* OpenClash v0.46.046-beta
+            #* WhatsApp Bot
+            #* and others
